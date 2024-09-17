@@ -1,233 +1,241 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+## Desafio de Desenvolvimento em Yii2 Framework
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
-rapidly creating small projects.
+## Informações Gerais
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+**Nome Completo:** Francisco das Chagas Teófilo da Silva  
+**Vaga:** Back-end Developer Pleno da FEBACAPITAL  
+**Data do Desafio:** 17 de setembro de 2024  
+**Contato:** [teophilo@gmail.com](mailto:teophilo@gmail.com)  
+**LinkedIn:** [www.linkedin.com/in/teophilo-silva-dev](https://www.linkedin.com/in/teophilo-silva-dev)
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![build](https://github.com/yiisoft/yii2-app-basic/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-basic/actions?query=workflow%3Abuild)
+## Requisitos
 
-DIRECTORY STRUCTURE
--------------------
+### Obrigatórios
+1. **PHP 7.4+** (preferencialmente PHP 8.0 ou superior)
+2. **Composer** na versão 2
+3. **Base de dados** em MySQL 8
+4. **Uso de JSON** para envio e recebimento de dados na API
+5. **Documentação** no README.md com instruções de uso, configuração e detalhes das APIs
+6. **Respostas HTTP apropriadas** (códigos 200, 201, 400, 401, 404, etc.)
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+### Desejáveis
+1. **Boas práticas de código** (PSR-12, SOLID)
+2. **Uso de migrations** do Yii2 para criação da base de dados
+3. **Subir o projeto** em um repositório Git (Github)
+4. **Desacoplar lógica de negócio** dos controllers, utilizando MVCS.
 
+## Funcionalidades
 
-
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 7.4.
-
-
-INSTALLATION
-------------
-
-### Install via Composer
-
-If you do not have [Composer](https://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](https://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-composer create-project --prefer-dist yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](https://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
+### 1. Autenticação
+- **Endpoint:** `POST /login`
+- **Descrição:** Implementa autenticação por credenciais (usuário/senha) e retorna um token JWT.
+- **Exemplo de Requisição:**
+  ```json
+  {
+    "username": "admin",
+    "password": "admin"
+  }
+  
+### Pode criar o usuário através do arquivo generate-auth-key.php na raiz do sistema
+```
+php generate-auth-key.php
 ```
 
-You can then access the application through the following URL:
 
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
+-   **Exemplo de Resposta:**
     
-Run the installation triggers (creating cookie validation code)
 
-    docker-compose run --rm php composer install    
     
-Start the container
-
-    docker-compose up -d
+    Copiar código
     
-You can then access the application through the following URL:
-
-    http://127.0.0.1:8000
-
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
-
-
-CONFIGURATION
--------------
-
-### Database
-
-Edit the file `config/db.php` with real data, for example:
-
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
-```
-
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
-
-
-TESTING
--------
-
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](https://codeception.com/).
-By default, there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-```
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full-featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](https://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
+    `{
+      "token": "your_jwt_token"
+    }` 
     
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
+
+### 2. Cadastro de Cliente
+
+-   **Endpoint:** `POST /cliente`
+-   **Descrição:** Cria um cliente com os campos `nome`, `cpf`, `cep`, `logradouro`, `numero`, `cidade`, `estado`, `complemento`, e `sexo`.
+-   **Exemplo de Requisição:**
     
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
     
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
+    Copiar código
+    
+    `{
+      "nome": "João da Silva",
+      "cpf": "12345678901",
+      "cep": "12345678",
+      "logradouro": "Rua Exemplo",
+      "numero": "123",
+      "cidade": "Cidade Exemplo",
+      "estado": "SP",
+      "complemento": "Apto 101",
+      "sexo": "M"
+    }` 
+    
+-   **Exemplo de Resposta:**
+    
+      
+    Copiar código
+    
+    `{
+      "id": 1,
+      "nome": "João da Silva",
+      "cpf": "12345678901",
+      "cep": "12345678",
+      "logradouro": "Rua Exemplo",
+      "numero": "123",
+      "cidade": "Cidade Exemplo",
+      "estado": "SP",
+      "complemento": "Apto 101",
+      "sexo": "M",
+      "created_at": "2024-09-17T00:00:00",
+      "updated_at": "2024-09-17T00:00:00"
+    }` 
+    
 
-5. (Optional) Create `yii2basic_test` database and update it by applying migrations if you have them.
+### 3. Lista de Clientes
 
-   ```
-   tests/bin/yii migrate
-   ```
+-   **Endpoint:** `GET /cliente`
+-   **Descrição:** Lista os clientes com parâmetros de paginação (`limit` e `offset`), ordenação e filtro.
+-   **Exemplo de Requisição:**
+    
+    
+    Copiar código
+    
+    `GET /cliente?limit=10&offset=0&order=name&filter[name]=João&filter[cpf]=12345678901` 
+    
+-   **Exemplo de Resposta:**
+    
+    Copiar código
+    
+    `[
+      {
+        "id": 1,
+        "nome": "João da Silva",
+        "cpf": "12345678901",
+        "cep": "12345678",
+        "logradouro": "Rua Exemplo",
+        "numero": "123",
+        "cidade": "Cidade Exemplo",
+        "estado": "SP",
+        "complemento": "Apto 101",
+        "sexo": "M",
+        "created_at": "2024-09-17T00:00:00",
+        "updated_at": "2024-09-17T00:00:00"
+      }
+    ]` 
+    
 
-   The database configuration can be found at `config/test_db.php`.
+### 4. Cadastro de Livros
 
+-   **Endpoint:** `POST /book`
+-   **Descrição:** Cria um livro com os campos `isbn`, `title`, `author`, `price`, e `stock`.
+-   **Exemplo de Requisição:**
+    
+    
+    Copiar código
+    
+    `{
+      "isbn": "9781234567890",
+      "title": "Livro Exemplo",
+      "author": "Autor Exemplo",
+      "price": 29.90,
+      "stock": 10
+    }` 
+    
+-   **Exemplo de Resposta:**
+    
+   
+    Copiar código
+    
+    `{
+      "id": 1,
+      "isbn": "9781234567890",
+      "title": "Livro Exemplo",
+      "author": "Autor Exemplo",
+      "price": 29.90,
+      "stock": 10
+    }` 
+    
 
-6. Start web server:
+### 5. Lista de Livros
 
-    ```
-    tests/bin/yii serve
-    ```
+-   **Endpoint:** `GET /book`
+-   **Descrição:** Lista os livros com parâmetros de paginação (`limit` e `offset`), ordenação e filtro.
+-   **Exemplo de Requisição:**
+    
+    
+    Copiar código
+    
+    `GET /book?limit=10&offset=0&order=title&filter[title]=Livro` 
+    
+-   **Exemplo de Resposta:**
+    
+       
+    Copiar código
+    
+    `[
+      {
+        "id": 1,
+        "isbn": "9781234567890",
+        "title": "Livro Exemplo",
+        "author": "Autor Exemplo",
+        "price": 29.90,
+        "stock": 10
+      }
+    ]` 
+    
 
-7. Now you can run all available tests
+## Tecnologias Utilizadas
 
-   ```
-   # run all available tests
-   vendor/bin/codecept run
+## Instalação e Configuração
 
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
+1.  Clone o repositório:
+  
+    Copiar código
+    
+    `git clone https://github.com/theophiloweb/desafio-yii2-api.git` 
+    
+2.  Navegue para o diretório do projeto:
+ 
+    Copiar código
+    
+    `cd desafio-yii2-api` 
+    
+3.  Instale as dependências com o Composer:
+     
+      
+    `composer install` 
+    
+4.  Configure o arquivo `.env` para o banco de dados e outras variáveis de ambiente conforme necessário.
+5.  Execute as migrations para criar as tabelas no banco de dados:
+    
+   
+    
+    `php yii migrate` 
+    
+6.  Popule o banco de dados com dados fictícios:
+      
+    
+    `php yii seed` 
+    
+7.  Inicie o servidor:
+    
+      
+    `php yii serve` 
+    
 
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
+## Testes com Insomnia
 
-### Code coverage support
+-   **Cadastro de Cliente:** `POST http://localhost:8082/cliente`
+-   **Lista de Clientes:** `GET http://localhost:8082/cliente`
+-   **Cadastro de Livro:** `POST http://localhost:8082/book`
+-   **Lista de Livros:** `GET http://localhost:8082/book`
 
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
+## Considerações Finais
 
-```
-#collect coverage for all tests
-vendor/bin/codecept run --coverage --coverage-html --coverage-xml
+O projeto foi desenvolvido seguindo boas práticas de desenvolvimento e otimização de queries SQL. Foram aplicados conceitos modernos de segurança e escalabilidade.
 
-#collect coverage only for unit tests
-vendor/bin/codecept run unit --coverage --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
+ `Você pode ajustar o conteúdo conforme necessário e garantir que todos os detalhes estejam corretos`
